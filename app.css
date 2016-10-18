@@ -27,7 +27,7 @@ div {
 
 .main-header {
     width: 100%;
-    height: 200px;
+    height: 230px;
     background: url("img/header-bg.jpg") repeat;
     display: inline-block;
 }
@@ -36,7 +36,15 @@ div {
     color: #FFFFFF !important;
     margin: 0 auto;
     text-align: center;
-    padding-top: 60px;
+    padding-top: 100px;
+}
+
+.logo-img img {
+    margin: auto;
+    top: 20px;
+    left: 0;
+    right: 0;
+    position: absolute;
 }
 
 h5 {
@@ -68,7 +76,7 @@ input[type="radio"]:checked {
     height: 50px;
     width: 400px !important;
     background-color: #FFF !important;
-    border: solid #2e7bcf 2px !important;
+    border: solid #3074C5 2px !important;
     padding: 6px 16px;
     font-size: 18px !important;
     font-weight: bold;
@@ -109,21 +117,21 @@ input[type="radio"]:checked {
     border-radius: 30px !important;
     background-color: #eee !important;
     border: none !important;
-    color: #2e7bcf !important;
+    color: #3074C5 !important;
 }
 
 .btn-round {
     height: 45px;
     width: 200px;
     border-radius: 30px !important;
-    background-color: #2e7bcf;
+    background-color: #3074C5;
     color: #FFFFFF;
     text-align: center !important;
     padding: 10px !important;
 }
 
 .btn-circle:hover {
-    background-color: #2e7bcf !important;
+    background-color: #3074C5 !important;
     color: #FFFFFF !important;
     border: none !important;
 }
@@ -144,9 +152,8 @@ input[type="radio"]:checked {
     font-size: 16px;
     font-weight: bold;
     margin: 10px;
-    color: #2e7bcf;
+    color: #3074C5;
 }
-
 
 .radio-default {
     height: 30px;
@@ -159,20 +166,109 @@ input[type="radio"]:checked {
     margin-left: 28px;
 }
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
 
+td, th {
+    text-align: left;
+    padding: 8px !important;
+}
 
+.block-week ul.block-content-change-date > li {
+    border-right: 1px solid #e5e5e5;
+    display: inline-block;
+    font-size: 12px;
+    margin-right: -3px;
+    padding: 10px 21px;
+    text-align: center;
+    width: 118px;
+}
 
+.block-week ul.block-content-change-date > li.active {
+    background: #3074C5;
+    color: #FFFFFF;
+}
 
+.table-col-row {
+    background-color: #e5e5e5;
+}
 
+.ticket-price {
+    color: #ff5640;
+    font-weight: bold;
+    font-size: 16px;
+    height: 30px;
+    margin: 0 auto;
+}
 
+.ticket-place {
+    opacity: 0.54;
+}
 
+td .btn-round {
+    width: auto !important;
+    height: 30px !important;
+    padding: 0px 16px !important;
+    float: right;
+}
 
+.i-result {
+    height: 56px;
+}
 
+.ticket-detail {
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+    padding: 16px;
+}
 
+.input-contact-infor {
+    width: 500px;
+    border: 1px solid #e0e0e0;
+    height: 40px;
+    margin-left: 20px;
+    padding: 4px 16px;
+}
 
+.input-normal {
+    border: 1px solid #e0e0e0;
+    height: 40px;
+    margin-left: 20px;
+    padding: 4px 16px;
+}
 
+.label-input {
+    width: 200px;
+    text-align: right;
+    float: left;
+}
 
+.booking-contact h4 {
+    color: #3074C5;
+    margin: 20px 0;
+}
 
+.passenger-infor {
+    margin: 20px 0px;
+}
+
+.ticket-cost {
+    border: 2px dashed #3074C5;
+    height: 60px;
+    width: 100%;
+    color: #3074C5;
+    text-align: center;
+    padding: 12px;
+    margin: 20px 0;
+    background-color: #e0e0e0;
+}
+
+.ticket-cost h2 {
+    color: #ff5640;
+    margin: 0 auto;
+}
 
 main {
     position: absolute;

@@ -1,33 +1,41 @@
-var dateSelect = $('#flight-datepicker');
-var dateDepart = $('#start-date');
-var dateReturn = $('#end-date');
-var spanDepart = $('.date-depart');
-var spanReturn = $('.date-return');
-var spanDateFormat = 'ddd, MMMM D yyyy';
-
-dateSelect.datepicker({
-    autoclose: true,
-    format: "dd/mm/yyyy",
-    maxViewMode: 0,
-    startDate: "now"
-}).on('change', function () {
-    var start = $.format.date(dateDepart.datepicker('getDate'), spanDateFormat);
-    var end = $.format.date(dateReturn.datepicker('getDate'), spanDateFormat);
-    spanDepart.text(start);
-    spanReturn.text(end);
-});
+var ticketInfor = {
+    type: "one-way",
+    from: "",
+    to: "",
+    depart: "",
+    return: "",
+    adults: 1,
+    children: 0,
+    infants: 0,
+    filter: "default"
+};
 
 var RadioComponent = React.createClass({
+
+    onToggleChange: function (e) {
+        // Flight type
+        if (e.currentTarget.name == "ticketType") {
+            ticketInfor.type = e.currentTarget.value;
+            console.log(ticketInfor.type);
+        }
+        // Filter: default, cheapest
+        else {
+            ticketInfor.filter = e.currentTarget.value;
+            console.log(ticketInfor.filter);
+        }
+    },
+
     render: function () {
         return (
             <label className="radio-opt">
-                <input type="radio" name={this.props.radioName} value={this.props.radioValue}/>{this.props.radioDes}
+                <input type="radio" onChange={this.onToggleChange} name={this.props.radioName}
+                       value={this.props.radioValue}/>{this.props.radioDes}
             </label>
         );
     }
 });
 
-var TicketTye = React.createClass({
+var TicketType = React.createClass({
     render: function () {
         return (
             <div>
@@ -41,49 +49,53 @@ var TicketTye = React.createClass({
 });
 
 var Location = React.createClass({
-   render: function () {
-       return (
-           <div className="location-picker">
-               <div className="location-picker-title">
-                   <i className="fa fa-plane" aria-hidden="true"/>
-                   <span>&nbsp;&nbsp;{this.props.label}</span>
-               </div>
-               <select className="input-default input-selection-box" id="department">
-                   <option className="selection-option">Hồ Chí Minh</option>
-                   <option className="selection-option">Hà Nội</option>
-                   <option className="selection-option">Đà Lạt</option>
-                   <option className="selection-option">Phú Quốc</option>
-               </select>
-           </div>
-       );
-   }
+    getInitialState: function() {
+        return null;
+    },
+
+    render: function () {
+        return (
+            <div className="location-picker">
+                <div className="location-picker-title">
+                    <i className="fa fa-plane" aria-hidden="true"/>
+                    <span>&nbsp;&nbsp;{this.props.label}</span>
+                </div>
+                <select className="input-default input-selection-box" name={this.props.name}>
+                    <option>Hồ Chí Minh</option>
+                    <option>Hà Nội</option>
+                    <option>Đà Lạt</option>
+                    <option>Phú Quốc</option>
+                </select>
+            </div>
+        );
+    }
 });
 
 var LocationPicker = React.createClass({
     render: function () {
         return (
             <div>
-                <Location label="bay từ"/>
+                <Location label="bay từ" name="from"/>
                 <span>&nbsp;&nbsp;<i className="fa fa-exchange" aria-hidden="true"/>&nbsp;&nbsp;</span>
-                <Location label="bay đến"/>
+                <Location label="bay đến" name="to"/>
             </div>
         );
     }
 });
 
 var DatePicker = React.createClass({
-   render: function () {
-       return (
-           <div className={this.props.class}>
-               <div className="location-picker-title">
-                   <i className="fa fa-calendar-check-o" aria-hidden="true"/>
-                   <span>&nbsp;&nbsp;{this.props.label}</span>
-               </div>
-               <input type="text" id={this.props.id} name="start" placeholder={this.props.placeHolder}
-                      data-date-format="DD, MM d" className="input-default input-selection-box"/>
-           </div>
-       );
-   }
+    render: function () {
+        return (
+            <div className={this.props.class}>
+                <div className="location-picker-title">
+                    <i className="fa fa-calendar-check-o" aria-hidden="true"/>
+                    <span>&nbsp;&nbsp;{this.props.label}</span>
+                </div>
+                <input type="text" id={this.props.id} name={this.props.name} placeholder={this.props.placeHolder}
+                       data-date-format="DD, MM d" className="input-default input-selection-box"/>
+            </div>
+        );
+    }
 });
 
 var DepartReturnDatePicker = React.createClass({
@@ -91,11 +103,31 @@ var DepartReturnDatePicker = React.createClass({
         return (
             <div>
                 <div id="flight-datepicker" className="input-daterange input-group">
-                    <DatePicker id="start-date" label="đi ngày" placeHolder="Chọn ngày đi"/>
-                    <DatePicker id="end-date" label="về ngày" placeHolder="Chọn ngày về" class="date-return"/>
+                    <DatePicker id="start-date" name="start" label="đi ngày" placeHolder="Chọn ngày đi"/>
+                    <DatePicker id="end-date" name="end" label="về ngày" placeHolder="Chọn ngày về"
+                                class="date-return"/>
                 </div>
             </div>
         );
+
+        var dateSelect = $('#flight-datepicker');
+        var dateDepart = $('#start-date');
+        var dateReturn = $('#end-date');
+        var spanDepart = $('.date-depart');
+        var spanReturn = $('.date-return');
+        var spanDateFormat = 'ddd, MMMM D yyyy';
+
+        dateSelect.datepicker({
+            autoclose: true,
+            format: "dd/mm/yyyy",
+            maxViewMode: 0,
+            startDate: "now"
+        }).on('change', function () {
+            var start = $.format.date(dateDepart.datepicker('getDate'), spanDateFormat);
+            var end = $.format.date(dateReturn.datepicker('getDate'), spanDateFormat);
+            spanDepart.text(start);
+            spanReturn.text(end);
+        });
     }
 });
 
@@ -142,23 +174,26 @@ var SearchOption = React.createClass({
 });
 
 var SearchBox = React.createClass({
+    // Handle find ticket click
+    handleFindTicket: function () {
+
+    },
+
     render: function () {
         return (
             <div className="main-container">
-                <TicketTye/>
+                <TicketType/>
                 <LocationPicker/>
                 <DepartReturnDatePicker/>
                 <hr/>
                 <PeopleSelection/>
                 <hr/>
                 <SearchOption/>
-                <a className="btn btn-round float-right"><i className="fa fa-search" aria-hidden="true"/>&nbsp;&nbsp;
-                    Tìm vé</a>
+                <a onClick={this.handleFindTicket} className="btn btn-round float-right">
+                    <i className="fa fa-search" aria-hidden="true"/>&nbsp;&nbsp;Tìm vé</a>
             </div>
         );
     }
 });
 
 ReactDOM.render(<SearchBox/>, document.getElementById('search-box'));
-
-
